@@ -6,11 +6,10 @@ import csp_methods.SolutionMethodBacktracking;
 import csp_methods.SolutionMethodForwardChecking;
 import csp_utility.Utility;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -36,42 +35,42 @@ public class Main extends Application {
         tWelcome.setStyle("-fx-font: 18 arial; -fx-font-weight: bold;");
 
         HBox hb1 = new HBox(20);
-        hb1.setPadding(new Insets(20,0,0,0));
         Label lSudokuNumber = new Label("Enter sudoku number:");
         lSudokuNumber.setStyle("-fx-font: 14 arial;");
         TextField tfSudokuNumber = new TextField("1");
         tfSudokuNumber.setPrefWidth(30);
         hb1.getChildren().addAll(lSudokuNumber, tfSudokuNumber);
+        hb1.setAlignment(Pos.CENTER_LEFT);
 
         HBox hb2 = new HBox(20);
-        hb2.setPadding(new Insets(20,0,0,0));
         Label lHeuristicVariable = new Label("Choose variable heuristic:");
         lHeuristicVariable.setStyle("-fx-font: 14 arial;");
-        ChoiceBox<String> cbHeuristicV = new ChoiceBox();
+        ChoiceBox<String> cbHeuristicV = new ChoiceBox<>();
         cbHeuristicV.setPrefWidth(110);
         cbHeuristicV.getItems().addAll("Ordered", "Most constrained");
         cbHeuristicV.setValue("Ordered");
         hb2.getChildren().addAll(lHeuristicVariable, cbHeuristicV);
+        hb2.setAlignment(Pos.CENTER_LEFT);
 
         HBox hb3 = new HBox(36);
-        hb3.setPadding(new Insets(20,0,0,0));
         Label lHeuristicDomain = new Label("Choose value heuristic:");
         lHeuristicDomain.setStyle("-fx-font: 14 arial;");
-        ChoiceBox<String> cbHeuristicD = new ChoiceBox();
+        ChoiceBox<String> cbHeuristicD = new ChoiceBox<>();
         cbHeuristicD.setPrefWidth(110);
         cbHeuristicD.getItems().addAll("Ordered", "Random");
         cbHeuristicD.setValue("Ordered");
         hb3.getChildren().addAll(lHeuristicDomain, cbHeuristicD);
+        hb3.setAlignment(Pos.CENTER_LEFT);
 
         HBox hb4 = new HBox(27);
-        hb4.setPadding(new Insets(20,0,0,0));
         Label lMethod = new Label("Choose solution method:");
         lMethod.setStyle("-fx-font: 14 arial;");
-        ChoiceBox<String> cbMethod = new ChoiceBox();
+        ChoiceBox<String> cbMethod = new ChoiceBox<>();
         cbMethod.setPrefWidth(110);
         cbMethod.getItems().addAll("Backtracking", "Forward checking");
         cbMethod.setValue("Backtracking");
         hb4.getChildren().addAll(lMethod, cbMethod);
+        hb4.setAlignment(Pos.CENTER_LEFT);
 
         Button bSolve = new Button("Solve");
         bSolve.setOnAction(new EventHandler<ActionEvent>() {
@@ -88,7 +87,6 @@ public class Main extends Application {
                     solve(Integer.parseInt(tfSudokuNumber.getText()), cbMethod.getValue(), cbHeuristicV.getValue(), cbHeuristicD.getValue());
                 }
                 catch(Exception e){
-                    e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Input Error");
                     alert.setHeaderText("Wrong input!");
@@ -99,12 +97,10 @@ public class Main extends Application {
             }
         });
 
-        Label lResults = new Label("Show results:");
+        Label lResults = new Label("Results");
         lResults.setStyle("-fx-font: 14 arial; -fx-font-weight: bold;");
         lResults.setPadding(new Insets(30,0,0,0));
-
-        Label lChosen = new Label("-");
-
+        
         HBox hb5 = new HBox(20);
 
         ToggleGroup tg = new ToggleGroup();
@@ -114,34 +110,10 @@ public class Main extends Application {
 
         r1.setToggleGroup(tg);
         r2.setToggleGroup(tg);
-
-        tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
-                RadioButton rb = (RadioButton) tg.getSelectedToggle();
-                if(rb!=null){
-                    String s = rb.getText();
-                    lChosen.setText(s);
-                }
-            }
-        });
+        
+        tg.selectToggle(r1);
 
         hb5.getChildren().addAll(r1, r2);
-
-        Button bOriginal = new Button("Show original");
-        bOriginal.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    Desktop.getDesktop().open(new File("results/board" + tfSudokuNumber.getText() + "_original_" + lChosen.getText() + ".txt"));
-                } catch (Exception e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("File Error");
-                    alert.setHeaderText("File doesn't exist! Please try again.");
-                    alert.showAndWait();
-                }
-            }
-        });
 
         HBox hb6 = new HBox(20);
         Label lSolutionNumber = new Label("Enter solution number:");
@@ -153,7 +125,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Desktop.getDesktop().open(new File("results/board" + tfSudokuNumber.getText() + "_solution" + tfSolutionNumber.getText() + "_" + lChosen.getText() + ".txt"));
+                    Desktop.getDesktop().open(new File("results/board" + tfSudokuNumber.getText() + "_solution" + tfSolutionNumber.getText() + "_" + ((RadioButton)tg.getSelectedToggle()).getText() + ".txt"));
                 } catch (Exception e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("File Error");
@@ -163,13 +135,29 @@ public class Main extends Application {
             }
         });
         hb6.getChildren().addAll(lSolutionNumber, tfSolutionNumber, bShow);
+        hb6.setAlignment(Pos.CENTER_LEFT);
 
         Button bResults = new Button("Show results");
         bResults.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Desktop.getDesktop().open(new File("results/board" + tfSudokuNumber.getText() + "_resultInfo_" + lChosen.getText() + ".txt"));
+                    Desktop.getDesktop().open(new File("results/board" + tfSudokuNumber.getText() + "_resultInfo_" + ((RadioButton)tg.getSelectedToggle()).getText() + ".txt"));
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("File Error");
+                    alert.setHeaderText("File doesn't exist! Please try again.");
+                    alert.showAndWait();
+                }
+            }
+        });
+        
+        Button bOriginal = new Button("Show original");
+        bOriginal.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Desktop.getDesktop().open(new File("results/board" + tfSudokuNumber.getText() + "_original.txt"));
                 } catch (Exception e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("File Error");
@@ -179,9 +167,9 @@ public class Main extends Application {
             }
         });
 
-        vb.getChildren().addAll(tWelcome, hb1, hb2, hb3, hb4, bSolve, lResults, hb5, lChosen, bOriginal, hb6, bResults);
+        vb.getChildren().addAll(tWelcome, hb1, hb2, hb3, hb4, bSolve, lResults, hb5, hb6, bResults, bOriginal);
 
-        primaryStage.setScene(new Scene(vb, 350, 590));
+        primaryStage.setScene(new Scene(vb, 350, 500));
         primaryStage.show();
     }
 

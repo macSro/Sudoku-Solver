@@ -1,32 +1,6 @@
 package csp_heuristics;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class HeuristicVariableMostConstrained extends HeuristicVariable{
-
-/*    @Override
-    public int[] getNextCoords(int[][] board) {
-        int[] result = {-1,-1};
-        ArrayList<int[]> allEmpty = new ArrayList<>(board.length * board.length);
-        for (int i = 0; i < board.length; i++)
-        {
-            for (int j = 0; j < board.length; j++)
-            {
-                if (board[i][j] == 0){
-                    allEmpty.add(new int[]{i,j});
-                }
-            }
-        }
-        System.out.println(allEmpty.size());
-        if(allEmpty.isEmpty()) {
-            return result;
-        }
-        else {
-            Collections.shuffle(allEmpty);
-            return allEmpty.get(0);
-        }
-    }*/
 
     @Override
     public int[] getNextCoords(int[][] board) {

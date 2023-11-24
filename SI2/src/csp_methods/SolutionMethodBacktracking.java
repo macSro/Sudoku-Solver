@@ -68,7 +68,7 @@ public class SolutionMethodBacktracking extends SolutionMethod{
             }
             Utility.saveTXT(solvedBoard, solvedIndex, "solution" + solvedCount, getMethodName(), getHeuristicName(heuristicVariable), getHeuristicName(heuristicDomain));
             solvedCount++;
-            return false;//aby znaleźć wszystkie
+            return false;//to find all solutions
         }
 
         //DOMAIN HEURISTIC

@@ -9,7 +9,7 @@ public class Utility {
     private final static String PATH = "data/Sudoku.csv";
 
     public static ArrayList<String> readCSV(){
-        ArrayList boards = new ArrayList<String>(BOARDS);
+        ArrayList<String> boards = new ArrayList<>(BOARDS);
         try{
             File file = new File(PATH);
             FileInputStream fis = new FileInputStream(file);
@@ -23,6 +23,7 @@ public class Utility {
                 split = line.split(";");
                 boards.add(split[2]);
             }
+            br.close();
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -31,7 +32,8 @@ public class Utility {
 
     public static void saveTXT(int[][] board, int index, String type, String method, String heuristicV, String heuristicD){
         try{
-            File file = new File("results/board" + index + "_" + type + "_" + method + ".txt");
+        	String pathPostfix = !type.equals("original") ? "_" + method : "";
+            File file = new File("results/board" + index + "_" + type + pathPostfix + ".txt");
             FileOutputStream fos = new FileOutputStream(file);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
             bw.write("Sudoku board number " + index + " (" + type + ")");
