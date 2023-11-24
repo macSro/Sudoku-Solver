@@ -161,6 +161,6 @@ After a Sudoku is solved additional execution details can be found in ```results
 
 ### Demo
 
-
+https://github.com/macSro/Sudoku-Solver/assets/56345054/b831d45b-9247-4798-9c0d-519cacf0cad6
 
 <p align="right">(<a href="#top">back to top</a>)</p>
