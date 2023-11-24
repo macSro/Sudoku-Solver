@@ -114,7 +114,7 @@ The simplest way to run the application is with the IDE's Run button or a keyboa
 The application offers the following GUI:
 
 <div align="center">
-  <img src="img/gui.png" style="width: 350" alt="GUI">
+  <img src="img/gui.png" width="300" alt="GUI">
 </div>
 
 * Sudoku number: _1-46 (see: <a href="#input-data">Input data</a>)_
@@ -132,7 +132,7 @@ The application offers the following GUI:
 * Original: _Check the original (unsolved) Sudoku in a human-readable form (zeros represent empty cells):_
 
 <div align="center">
-  <img src="img/original.png" style="width: 350" alt="Unsolved Sudoku">
+  <img src="img/original.png" width="300" alt="Unsolved Sudoku">
 </div>
 
 ### Input data
@@ -140,7 +140,7 @@ The application offers the following GUI:
 ```data/Sudoku.csv``` contains 46 Sudokus (1-5 include solutions for reference) varying in difficulty (1 = easiest, 9 = hardest). Empty cells are represented by a "." symbol. If you'd like to provide your own Sudoku to solve, either replace one of the rows with your Sudoku in the same format, or modify the code to your needs :)
 
 <div align="center">
-  <img src="img/input_data.png" style="width: 350" alt="Input data">
+  <img src="img/input_data.png" width="300" alt="Input data">
 </div>
 
 ### Results
@@ -148,7 +148,7 @@ The application offers the following GUI:
 Similarly to the "original", solved Sudokus are available in a human-readable form. You can access result files via GUI or manually in ```results/board<id>_solution<idOfSolution>_<solutionMethod>```. Here's an example:
 
 <div align="center">
-  <img src="img/solution.png" style="width: 350" alt="Solved Sudoku">
+  <img src="img/solution.png" width="300" alt="Solved Sudoku">
 </div>
 
 #### Result info
@@ -156,7 +156,7 @@ Similarly to the "original", solved Sudokus are available in a human-readable fo
 After a Sudoku is solved additional execution details can be found in ```results/board<id>_resultInfo_<solutionMethod>.txt```. Here you can find the number of solutions found in order to check all of them via GUI.
 
 <div align="center">
-  <img src="img/result_info.png" style="width: 350" alt="Result info">
+  <img src="img/result_info.png" width="300" alt="Result info">
 </div>
 
 ### Demo
